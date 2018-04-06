@@ -36,17 +36,21 @@ $strings["menu.label"]="Backends virtuels";
 $strings["label.overload"]="Hériter l'hôte du backend virtuel";
 $strings["label.overload.placeholder"]="ID d'Hôte \"backend\" virtuel";
 
-$strings["hosts.edit.tooltip"]="Changer l'adresse de cet hôte et appliquer la configuration";
+$strings["hosts.edit.tooltip"]="Changer l'adresse de cet hôte et appliquer la ".
+                               "configuration";
 $strings["hosts.delete.tooltip"]="Supprimer cet hôte";
 
-$strings["hosts.delete.confirm"]="Supprimer la configuration pour le backend virtuel ";
+$strings["hosts.delete.confirm"]="Supprimer la configuration pour le backend ".
+                                 "virtuel";
 $strings["host.properties"] = "Propriétés du backend virtuel";
 
 $strings["host.virtualHost.placeholder"]="n/a";
 $strings["host.virtualHost.tooltip"]="n/a";
 
 $strings["host.hostAddress.placeholder"]="adresse réelle de l'hôte backend";
-$strings["host.hostAddress.tooltip"]="Entrez ici l'address réelle de l'hôte backend.<br>Par exemple: 172.16.0.3:51 ou my-server.com ou encore 172.160.5";
+$strings["host.hostAddress.tooltip"]="Entrez ici l'address réelle de l'hôte ".
+                                     "backend.<br>Par exemple: 172.16.0.3:51 ".
+                                     "ou my-server.com ou encore 172.160.5";
 
 $strings["list.actions"]="Actions";
 $strings["button.ok"]="OK";
