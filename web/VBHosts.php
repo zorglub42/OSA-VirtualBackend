@@ -35,8 +35,8 @@
 require_once 'include/Settings.php';
 require_once 'include/DataModel.php';
 require_once 'include/ConfigDAO.php';
-require_once OSA_INSTALL_DIR . '/include/Func.inc.php';
-require_once OSA_INSTALL_DIR . '/include/Func.inc.php';
+require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
+require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
 
 
 chdir(OSA_INSTALL_DIR . '/api');
