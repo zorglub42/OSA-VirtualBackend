@@ -39,7 +39,7 @@ require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
 require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
 
 
-chdir(OSA_INSTALL_DIR . '/api');
+chdir(OSA_INSTALL_DIR . '/ApplianceManager.php/api');
 require_once '../objects/Service.class.php';
 require_once 'Services.php';
 
