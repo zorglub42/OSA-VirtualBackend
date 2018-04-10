@@ -66,7 +66,23 @@ function editVBHost(vbHost){
 			$( "#content" ).html( data.replaceAll("{host.virtualHost}", vbHost.virtualHost )
 									  .replaceAll("{host.hostAddress}", vbHost.hostAddress)
 							    );
-			setVBHostModified(false);
+			table=document.getElementById("data");
+			rowPattern=document.getElementById("rowTpl");
+			table.removeChild(rowPattern);
+
+			for (i=0;i<vbHost.services.length;i++){
+
+				newRow=rowPattern.cloneNode(true);
+				newRow.removeAttribute('id');
+				newRow.removeAttribute('style');
+				newRow.className=newRow.className + " tabular_table_body" +  (i%2);
+				newRow.innerHTML=newRow.innerHTML.replaceAll("{host.services[i].serviceName}", vbHost.services[i].serviceName)
+												 .replaceAll("{host.services[i].frontendEndpoint}", vbHost.services[i].frontEndEndPoint)
+												 .replaceAll("{host.services[i].backendEndpoint}", vbHost.services[i].backEndEndPoint);
+				table.appendChild(newRow);
+			}
+								
+			setVBHostModified(true);
 	});
 
 }
@@ -164,7 +180,8 @@ function displayVBHostsList(hostsList){
 				newRow.removeAttribute('style');
 				newRow.className=newRow.className + " tabular_table_body" +  (i%2);
 				newRow.innerHTML=newRow.innerHTML.replaceAll("{hostsList[i].virtualHost}", hostsList[i].virtualHost)
-													.replaceAll("{hostsList[i].hostAddress}", hostsList[i].hostAddress);
+												 .replaceAll("{hostsList[i].hostAddress}", hostsList[i].hostAddress)
+												 .replaceAll("{hostsList[i].services.length}", hostsList[i].services.length);
 				table.appendChild(newRow);
 				edit=document.getElementById("btnEdit");
 				del=document.getElementById("btnDelete");

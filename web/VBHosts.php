@@ -32,16 +32,17 @@
  # History     :
  # 1.0.0 - 2017-04-05 : Release of the file
 */
+require_once 'VBServices.php';
 require_once 'include/Settings.php';
 require_once 'include/DataModel.php';
 require_once 'include/ConfigDAO.php';
 require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
-require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
 
-
+$curDir = getcwd();
 chdir(OSA_INSTALL_DIR . '/ApplianceManager.php/api');
 require_once '../objects/Service.class.php';
 require_once 'Services.php';
+chdir($curDir);
 
 
 /**
@@ -74,6 +75,11 @@ class VBHosts
         $osaService["backEndEndPoint"]=$newEndpoint;
         return $osaService;
     }
+
+
+
+
+
     /**
      * Get all configured hosts
      * 
@@ -85,6 +91,7 @@ class VBHosts
      */
     function get()
     {
+        $osaService = new Services();
         $rc=array();
 
         OSAVBConfigDAO::loadData();
@@ -95,7 +102,18 @@ class VBHosts
             // $services=$config["services"];
             // $publicServiceList=Array();
             foreach ($services as $serviceName => $service) {
-                 array_push($config["services"], $service);
+                try {
+                    $svc=$osaService->getOne($service["serviceName"]);
+                    array_push($config["services"], $svc);
+                }catch (RestException $re){
+                    if ($re->getCode() != 404){
+                        throw $re;
+                    }else{
+                        $vbSvc = new VBServices();
+
+                        $vbSvc->delete($service["serviceName"]);
+                    }
+                }
             }
             array_push($rc, $config);
         }

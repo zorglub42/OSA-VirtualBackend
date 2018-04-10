@@ -56,6 +56,9 @@ $strings["list.actions"]="Actions";
 $strings["button.ok"]="OK";
 $strings["button.cancel"]="Annuler";
 
-$strings["hosts.list.found"]=" bacnkend(s) virtuel(s) trouvé(s)";
+$strings["hosts.list.found"]=" backend(s) virtuel(s) trouvé(s)";
 $strings["hosts.list.hostAddress"] = "Adresse réelle";
 $strings["hosts.list.virtualHost"] = "Backend virtuel";
+$strings["hosts.list.servicesCount"] = "Nombre de service(s) associé(s)";
+
+$strings["service.list.name"] = "Services associés";

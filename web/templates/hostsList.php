@@ -43,14 +43,17 @@ require_once "../include/VB_Localization.php";
 			</div>
 			<div class="panel-body">
 				<div class="row list-group-item header" >
-						<div class="col-xs-4 col-md-4 ellipsis"><?php echo VB_Localization::getString("hosts.list.virtualHost")?></div>
-						<div class="col-xs-5 col-md-6 ellipsis"><?php echo VB_Localization::getString("hosts.list.hostAddress")?></div>
+						<div class="col-xs-4 col-md-3 ellipsis"><?php echo VB_Localization::getString("hosts.list.virtualHost")?></div>
+						<div class="col-xs-5 col-md-4 ellipsis"><?php echo VB_Localization::getString("hosts.list.hostAddress")?></div>
+						<div class="col-xs-5 col-md-3 ellipsis"><?php echo VB_Localization::getString("hosts.list.servicesCount")?></div>
 						<div class="col-xs-3 col-md-2	 ellipsis"><?php echo VB_Localization::getString("list.actions")?></div>
 				</div>
 				<div class="list-group" id="data">
 					<a class="list-group-item row" id="rowTpl" style="display:none">
-						<div ondblclick="startEditVBHost('{hostsList[i].virtualHost}')">							<div class="col-xs-4 col-md-4 ellipsis" title="{hostsList[i].virtualHost}">{hostsList[i].virtualHost}</div>
-							<div class="col-xs-5 col-md-6 ellipsis" title="{hostsList[i].hostAddress}">{hostsList[i].hostAddress}</div>
+						<div ondblclick="startEditVBHost('{hostsList[i].virtualHost}')">
+							<div class="col-xs-4 col-md-3 ellipsis" title="{hostsList[i].virtualHost}">{hostsList[i].virtualHost}</div>
+							<div class="col-xs-5 col-md-4 ellipsis" title="{hostsList[i].hostAddress}">{hostsList[i].hostAddress}</div>
+							<div class="col-xs-4 col-md-3 ellipsis" title="{hostsList[i].services.length}">{hostsList[i].services.length}</div>
 							<div class="col-xs-3 col-md-2 ">
 								<button type="button" class="btn btn-default" id="btnEdit" title="<?php echo VB_Localization::getString("hosts.edit.tooltip")?>" onclick="startEditVBHost('{hostsList[i].virtualHost}')">
 								  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

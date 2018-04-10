@@ -36,6 +36,10 @@ require_once 'include/Settings.php';
 require_once 'include/DataModel.php';
 require_once 'include/ConfigDAO.php';
 
+$curDir = getcwd();
+chdir(OSA_INSTALL_DIR . '/ApplianceManager.php/api');
+require_once '../objects/Service.class.php';
+chdir($curDir);
 
 /**
  * Manage Services configuration for Virtual Backends

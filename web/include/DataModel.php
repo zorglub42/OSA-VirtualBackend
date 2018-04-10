@@ -32,6 +32,10 @@
  # 1.0.0 - 2017-03-01 : Release of the file
 */
 
+$curDir = getcwd();
+chdir(OSA_INSTALL_DIR . '/ApplianceManager.php/api');
+require_once '../objects/Service.class.php';
+chdir($curDir);
 
 /**
  * Services
@@ -91,7 +95,7 @@ class OSAVBHost
     /**
      * Associated services
      * 
-     * @var array {@type OSAVBService} 
+     * @var array {@type Service} 
      */
     var $services=Array();
 }    

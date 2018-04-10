@@ -57,3 +57,7 @@ $strings["button.cancel"]="Cancel";
 $strings["hosts.list.found"]=" bacnkend(s) found";
 $strings["hosts.list.hostAddress"] = "Real address";
 $strings["hosts.list.virtualHost"] = "Virtual backend";
+$strings["hosts.list.servicesCount"] = "Associated services count";
+
+
+$strings["service.list.name"] = "Associated services";

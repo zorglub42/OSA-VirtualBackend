@@ -34,13 +34,17 @@
  # 1.0.0 - 2018-04-05 : Release of the file
 */
 require_once "../include/VB_Localization.php";
+require_once "../include/Settings.php";
+
+require_once  OSA_INSTALL_DIR . '/ApplianceManager.php/include/Localization.php';
+
 ?>
 
 		<div class="row" id="hostEdit">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><b><?php echo VB_Localization::getString("host.properties")?></b></h3>
+						<h3 class="panel-title"><b><?php echo VB_Localization::getString("host.properties")?>: {host.virtualHost}</b></h3>
 					</div>
 					<div class="panel-body">
 						<form accept-charset="UTF-8" role="form">
@@ -54,6 +58,23 @@ require_once "../include/VB_Localization.php";
 
 						</fieldset>
 						</form>
+						<hr>
+						<div class="row " >
+							<div class="col-xs-12 col-md-12 ellipsis"><label><?php echo VB_Localization::getString("service.list.name")?></label></div>
+						</div>
+						<div class="row list-group-item header" >
+						<div class="col-xs-4 col-md-4 ellipsis"><?php echo Localization::getString("service.list.serviceName")?></div>
+						<div class="col-xs-4 col-md-4 ellipsis"><?php echo Localization::getString("service.list.frontendEndpoint")?></div>
+						<div class="col-xs-4 col-md-4 ellipsis"><?php echo Localization::getString("service.list.backendEndpoint")?></div>
+						</div>
+						<div class="list-group" id="data">
+							<a class="list-group-item row" id="rowTpl" style="display:none">
+							<div class="col-xs-4 col-md-4 ellipsis" title="{host.services[i].serviceName}">{host.services[i].serviceName}</div>
+							<div class="col-xs-4 col-md-4 ellipsis" title="{host.services[i].frontendEndpoint}">{host.services[i].frontendEndpoint}</div>
+							<div class="col-xs-4 col-md-4 ellipsis" title="{host.services[i].backendEndpoint}">{host.services[i].backendEndpoint}</div>
+							</a>
+						</div>
+						
 					</div>
 					<div class="panel-footer">
 							<div class="row">
