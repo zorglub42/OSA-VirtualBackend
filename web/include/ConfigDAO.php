@@ -60,7 +60,10 @@ class OSAVBConfigDAO
             OSAVBConfigDAO::$config=Array();
             if (file_exists(DATA_FILE)) {
                 OSAVBConfigDAO::$config=json_decode(file_get_contents(DATA_FILE), true);
-    
+                ksort(OSAVBConfigDAO::$config);
+                foreach (OSAVBConfigDAO::$config as $hostname => $config) {
+                    ksort(OSAVBConfigDAO::$config[$hostname]["services"]);
+                }
             }
         }
     }
