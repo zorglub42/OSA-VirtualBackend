@@ -253,5 +253,5 @@ addonAddGUIHook("#mainMenu", addVirtualBackendMenu);
 addonAddGUIHook("#backEndEndPoint", addVirtualBackendToService);
 
 //Add OSA-VirtualBackend API doucmentation menu item
-addonAddDocURI("virtualbackend", "doc");
+addonAddDocURI("virtualbackend", "doc/");
 
