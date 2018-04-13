@@ -100,15 +100,15 @@ function executeDefaultSaveHandler(){
 }
 
 function saveService4VB(){
-	if (previousVH != null && previousVH != "" ){
+	if (previousVH != null && previousVH != "" && !	doServiceClone && previousVH != $("#serviceName").val()){
 		$.ajax({
 			url: "addons/virtualbackend/services/" + $("#serviceName").val(),
 			dataType: 'json',
 			type:'DELETE',
-			success: executeDefaultSaveHandler,
 			error: displayErrorV2
 		});
-	}else if ($("#virtualBackendImageId").val() != ""){
+	}
+	if ($("#virtualBackendImageId").val() != ""){
 		conf={
 			virtualHost: $("#virtualBackendImageId").val(),
 			serviceName: $("#serviceName").val()
@@ -137,9 +137,9 @@ function addVirtualBackendToService(){
 			$("#backEndEndPoint").parent().html('<div class="row"><div class="col-md-7">' + orgHTML + '</div><div class="col-md-5">' + data + '</div></div>')
 			$("#saveService").attr("onclick", "saveService4VB()")
 			previousVH=null
-			if ($("#serviceName").val()!= ""){
+			if (currentService.serviceName != ""){
 				$.get(
-					"addons/virtualbackend/services/" + $("#serviceName").val(),
+					"addons/virtualbackend/services/" + currentService.serviceName,
 					function (conf){
 						$("#virtualBackendImageId").val(conf.virtualHost)
 						previousVH=conf.virtualHost
