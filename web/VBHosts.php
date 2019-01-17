@@ -66,7 +66,7 @@ class VBHosts
      * 
      * @return Service Service updated
      */
-    private function _updateBackendEndpoint($osaService, $hostAddress){
+    private function _updateBackendEndpoint($osaService, $hostAddress) {
         $newEndpoint=preg_replace(
             "/(.*):\/\/[^\/|^$]*(.*)/", 
             '$1://' . $hostAddress . '$2', 
@@ -162,6 +162,7 @@ class VBHosts
      */
     function updateAndDeploy($virtualHost, $hostAddress)
     {
+        $hostAddress=preg_replace("/.*:\/\/([^\/]*).*/", '$1', $hostAddress);
         OSAVBConfigDAO::loadData();
         $host = $this->getOne($virtualHost);
         $host["hostAddress"]=$hostAddress;
