@@ -135,13 +135,13 @@ class VBHosts
     {
         $rc = null;
         $hosts=$this->get();
-        foreach ($hosts as $host){
-            if ($host["virtualHost"]==$virtualHost){
+        foreach ($hosts as $host) {
+            if ($host["virtualHost"] == $virtualHost) {
                 $rc=$host;
                 break;
             }
         }
-        if ($rc == null){
+        if ($rc == null) {
             throw new RestException(404, "Can't find host " . $virtualHost);
         }
         return $rc;
@@ -171,22 +171,38 @@ class VBHosts
 
         $osaServicesAPI=new Services();
 
-        foreach ($host["services"] as $service){
+        foreach ($host["services"] as $service) {
             $osaService = $osaServicesAPI->getOne($service["serviceName"]);
             $osaService=$this->_updateBackendEndpoint($osaService, $hostAddress);
 
-            $osaServicesAPI->update(
-                $osaService["serviceName"], $osaService["frontEndEndPoint"], $osaService["backEndEndPoint"],
-                $osaService["isPublished"], $osaService["additionalConfiguration"],
-                $osaService["isHitLoggingEnabled"], $osaService["onAllNodes"],
-                $osaService["isUserAuthenticationEnabled"], $osaService["groupName"],
-                $osaService["isIdentityForwardingEnabled"], $osaService["isAnonymousAllowed"],
-                $osaService["backEndUsername"], $osaService["backEndPassword"], $osaService["loginFormUri"],
-                $osaService["isGlobalQuotasEnabled"], $osaService["reqSec"], $osaService["reqDay"],
-                $osaService["reqMonth"], $osaService["isUserQuotasEnabled"], 1
-            );
-                    }
-        if (!applyApacheConfiguration()){
+            if (isset($osaService["additionalBackendConnectionConfiguration"])) {
+                // OSA > 4.1
+                    $osaServicesAPI->update(
+                        $osaService["serviceName"], $osaService["frontEndEndPoint"], $osaService["backEndEndPoint"],
+                        $osaService["isPublished"], $osaService["additionalConfiguration"], $osaService["additionalBackendConnectionConfiguration"],
+                        $osaService["isHitLoggingEnabled"], $osaService["onAllNodes"],
+                        $osaService["isUserAuthenticationEnabled"], $osaService["groupName"],
+                        $osaService["isIdentityForwardingEnabled"], $osaService["isAnonymousAllowed"],
+                        $osaService["backEndUsername"], $osaService["backEndPassword"], $osaService["loginFormUri"],
+                        $osaService["isGlobalQuotasEnabled"], $osaService["reqSec"], $osaService["reqDay"],
+                        $osaService["reqMonth"], $osaService["isUserQuotasEnabled"], 1
+                    );
+            } else {
+                // OSA <= 4.1
+                $osaServicesAPI->update(
+                    $osaService["serviceName"], $osaService["frontEndEndPoint"], $osaService["backEndEndPoint"],
+                    $osaService["isPublished"], $osaService["additionalConfiguration"],
+                    $osaService["isHitLoggingEnabled"], $osaService["onAllNodes"],
+                    $osaService["isUserAuthenticationEnabled"], $osaService["groupName"],
+                    $osaService["isIdentityForwardingEnabled"], $osaService["isAnonymousAllowed"],
+                    $osaService["backEndUsername"], $osaService["backEndPassword"], $osaService["loginFormUri"],
+                    $osaService["isGlobalQuotasEnabled"], $osaService["reqSec"], $osaService["reqDay"],
+                    $osaService["reqMonth"], $osaService["isUserQuotasEnabled"], 1
+                );
+    
+            }
+        }
+        if (!applyApacheConfiguration()) {
             throw new RestException(500, "Error while applying apache configuration");
         }
         return $host;
