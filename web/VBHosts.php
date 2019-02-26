@@ -175,7 +175,7 @@ class VBHosts
             $osaService = $osaServicesAPI->getOne($service["serviceName"]);
             $osaService=$this->_updateBackendEndpoint($osaService, $hostAddress);
 
-            if (isset($osaService["additionalBackendConnectionConfiguration"])) {
+            if (array_key_exists("additionalBackendConnectionConfiguration", $osaService)) {
                 // OSA > 4.1
                     $osaServicesAPI->update(
                         $osaService["serviceName"], $osaService["frontEndEndPoint"], $osaService["backEndEndPoint"],
