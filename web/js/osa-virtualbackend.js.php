@@ -81,6 +81,28 @@ function editVBHost(vbHost){
 												 .replaceAll("{host.services[i].backendEndpoint}", vbHost.services[i].backEndEndPoint);
 				table.appendChild(newRow);
 			}
+			$.get(
+				"addons/virtualbackend/hosts/docker/containers",
+				function (data) {
+					var autoCompleteList = new Array();
+					for (i=0;i<data.length; i++){
+						for (j=0;j<data[i].ports.length;j++){
+							autoCompleteList.push(
+								{
+									"label": data[i].address +  ":" + data[i].ports[j] + " (" + data[i].name + ")",
+									"value" : data[i].address +  ":" + data[i].ports[j]
+								}
+							);
+						}
+					}
+					autoCompleteList.sort();
+					$("#vbHostAddress").autocomplete({
+							source: autoCompleteList,
+							minLength: 0
+					});
+
+				}
+			)
 								
 			setVBHostModified(true);
 	});

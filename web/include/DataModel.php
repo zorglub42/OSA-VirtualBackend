@@ -99,3 +99,27 @@ class OSAVBHost
      */
     var $services=Array();
 }    
+
+class OSAVBDockerContainer
+{
+    
+    /**
+     * Container name {@required true}
+     * 
+     * @var string 
+    */
+    public  $name;
+    /**
+     * Container IP {@required true}
+     * 
+     * @var string 
+     */
+    public  $address;
+
+    /**
+     * Mapped or exposed ports
+     * 
+     * @var array {@type int}
+     */
+    public $ports = Array();
+}

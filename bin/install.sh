@@ -61,3 +61,6 @@ changeProperty $INSTALL_DIR/web/include/Settings.php OSA_INSTALL_DIR '"'$OSA_INS
 ln -s $INSTALL_DIR/web $OSA_INSTALL_DIR/ApplianceManager.php/addons/virtualbackend
 chmod 777 $INSTALL_DIR/data
 
+#Config sudoers
+cp $INSTALL_DIR/bin/OSAVB /etc/sudoers.d
+

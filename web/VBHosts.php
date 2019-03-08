@@ -34,6 +34,7 @@
 */
 require_once 'VBServices.php';
 require_once 'include/Settings.php';
+require_once 'include/docker.php';
 require_once 'include/DataModel.php';
 require_once 'include/ConfigDAO.php';
 require_once OSA_INSTALL_DIR . '/ApplianceManager.php/include/Func.inc.php';
@@ -78,7 +79,51 @@ class VBHosts
 
 
 
+    /**
+     * Get running docker containers
+     * 
+     * Get all running docker containers
+     * 
+     * @url GET /docker/containers
+     * 
+     */
+    function getDockerContainers(){
+        $rc = Array();
+        foreach (getContainersNames() as $name){
+            $container = new OSAVBDockerContainer();
+            $container->name = $name;
+            $container->address = getContainerIP($name);
+            $container->ports = getContainerPorts($name);
+            array_push($rc, $container);
+        }
 
+        return $rc;
+    }
+
+    /**
+     * Get running docker containers
+     * 
+     * Get all running docker containers
+     * 
+     * @param string $container Docker container name or ID
+     * 
+     * @url GET /docker/containers/:container
+     * 
+     * @return OSAVBDockerContainer container
+     * 
+     */
+    function getDockerContainer($container){
+        if (containerExists($container)) {
+            $res = new OSAVBDockerContainer();
+            $res->name = $container;
+            $res->address = getContainerIP($container);
+            $res->ports = getContainerPorts($container);
+        } else {
+            throw new RestException(404,"Container does not exists");
+        }
+
+        return $res;
+    }
 
     /**
      * Get all configured hosts

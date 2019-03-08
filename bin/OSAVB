@@ -1,0 +1,6 @@
+#OSA-VirtualBackend
+Defaults:www-data    !requiretty
+Cmnd_Alias      DOCKER_CMD=/usr/bin/docker
+User_Alias      OSAVB_USERS=www-data  OSAVB_USERS       ALL = NOPASSWD: DOCKER_CMD
+#End of OSA-VirtualBackend
+
