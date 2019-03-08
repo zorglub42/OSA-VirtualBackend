@@ -86,6 +86,12 @@ function editVBHost(vbHost){
 				function (data) {
 					var autoCompleteList = new Array();
 					for (i=0;i<data.length; i++){
+						autoCompleteList.push(
+								{
+									"label": data[i].address + " (" + data[i].name + ")",
+									"value" : data[i].address
+								}
+							);
 						for (j=0;j<data[i].ports.length;j++){
 							autoCompleteList.push(
 								{
