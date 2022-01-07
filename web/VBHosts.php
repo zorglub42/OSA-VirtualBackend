@@ -68,11 +68,19 @@ class VBHosts
      * @return Service Service updated
      */
     private function _updateBackendEndpoint($osaService, $hostAddress) {
-        $newEndpoint=preg_replace(
-            "/(.*):\/\/[^\/|^$]*(.*)/", 
-            '$1://' . $hostAddress . '$2', 
-            $osaService["backEndEndPoint"]
-        );
+        if (preg_match("/^https?:\/\//", $hostAddress)){
+            $newEndpoint=preg_replace(
+                "/(.*):\/\/[^\/|^$]*(.*)/", 
+                $hostAddress . '$2', 
+                $osaService["backEndEndPoint"]
+            );
+        }else{
+            $newEndpoint=preg_replace(
+                "/(.*):\/\/[^\/|^$]*(.*)/", 
+                '$1://' . $hostAddress . '$2', 
+                $osaService["backEndEndPoint"]
+            );
+        }
         $osaService["backEndEndPoint"]=$newEndpoint;
         return $osaService;
     }
@@ -207,13 +215,12 @@ class VBHosts
      */
     function updateAndDeploy($virtualHost, $hostAddress)
     {
-        $hostAddress=preg_replace("/.*:\/\/([^\/]*).*/", '$1', $hostAddress);
+        // $hostAddress=preg_replace("/.*:\/\/([^\/]*).*/", '$1', $hostAddress);
         OSAVBConfigDAO::loadData();
         $host = $this->getOne($virtualHost);
         $host["hostAddress"]=$hostAddress;
         OSAVBConfigDAO::$config[$virtualHost]["hostAddress"]=$hostAddress;
         OSAVBConfigDAO::saveData();
-
         $osaServicesAPI=new Services();
 
         foreach ($host["services"] as $service) {
